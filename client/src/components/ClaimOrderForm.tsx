@@ -12,10 +12,15 @@ import { NumberedStep } from "../components/NumberedStep";
 import { ReadOnlyInput } from "../components/ReadOnlyInput";
 import { SingleLineInput } from "../components/SingleLineInput";
 import { StyledLink } from "../components/StyledLink";
+import { encryptMessage } from "../helpers/messagEncryption";
+
+// this we have to update
+import { generateVenmoIdHash } from "../helpers/venmoHash";
 import { abi } from "../helpers/ramp.abi";
 import { OnRampOrder } from "../helpers/types";
 import { formatAmountsForTransactionParameter } from '../helpers/transactionFormat';
 import { useRampContractAddress } from '../hooks/useContractAddress';
+import { hash } from 'eth-crypto';
 
 
 interface ClaimOrderFormProps {
@@ -25,7 +30,7 @@ interface ClaimOrderFormProps {
   rampExplorerLink: string;
   usdcExplorerLink: string;
 }
- 
+
 export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
   loggedInWalletAddress,
   senderRequestedAmountDisplay,
@@ -33,10 +38,13 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
   rampExplorerLink,
   usdcExplorerLink
 }) => {
-  const [upiIdInput, setUpiIdInput] = useState<string>("");
+  const persistedVenmoIdKey = `persistedVenmoId_${loggedInWalletAddress}`;
+  const [upiIdInput, setUpiIdInput] = useState<string>(localStorage.getItem(persistedVenmoIdKey) || "");
   const [upiUsername, setUpiUsername] = useState<string>("");
   const [requestedUSDAmountInput, setRequestedUSDAmountInput] = useState<number>(0);
 
+  const [encryptedVenmoId, setEncryptedVenmoId] = useState<string>('');
+  const [hashedVenmoId, setHashedVenmoId] = useState<string>('');
 
   const { chain } = useNetwork();
 
@@ -53,9 +61,11 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
     contractInterface: abi,
     functionName: 'claimOrder',
     args: [
-      upiIdInput,
+      upiIdInput,  
       upiUsername,
-      selectedOrder.orderId
+      selectedOrder.orderId,
+      '0x' + encryptedVenmoId,
+      formatAmountsForTransactionParameter(requestedUSDAmountInput)
     ],
 
     onError: (error: { message: any }) => {
@@ -79,21 +89,21 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
     setRequestedUSDAmountInput(0);
   }, [selectedOrder]);
 
-  // useEffect(() => {
-  //   // create an async function inside the effect
-  //   const updateVenmoId = async () => {
-  //     if(upiIdInput && upiIdInput.length > 15) {
-  //       const encryptedVenmoId = await encryptMessage(upiIdInput,selectedOrder.onRamper);
-  //       setEncryptedVenmoId(encryptedVenmoId);
-  
-  //       const hashedVenmoId = await generateVenmoIdHash(upiIdInput);
-  //       setHashedVenmoId(hashedVenmoId);
-  
-  //     }
-  //   }
-  
-  //   updateVenmoId();
-  // }, [upiIdInput]);
+  useEffect(() => {
+    // create an async function inside the effect
+    const updateVenmoId = async () => {
+      if (upiIdInput && upiIdInput.length > 4) {
+        const encryptedVenmoId = await encryptMessage(upiIdInput, selectedOrder.onRamperEncryptPublicKey);
+        setEncryptedVenmoId(encryptedVenmoId);
+
+        const hashedVenmoId = await generateVenmoIdHash(upiIdInput);
+        setHashedVenmoId(hashedVenmoId);
+
+      }
+    }
+
+    updateVenmoId();
+  }, [upiIdInput]);
 
   /*
     Component
@@ -115,15 +125,15 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
         <NumberedInputContainer>
           <NumberedStep>
             Specify a numeric <StyledLink
-            urlHyperlink="https://github.com/0xSachinK/zk-p2p-onramp/blob/main/README.md#fetching-venmo-id-instructions"
-            label={'Venmo ID'}/> to receive USD at and a USD amount to receive. Your
+              urlHyperlink="https://github.com/0xSachinK/zk-p2p-onramp/blob/main/README.md#fetching-venmo-id-instructions"
+              label={'Venmo ID'} /> to receive USD at and a USD amount to receive. Your
             Venmo ID will be encrypted. Submitting this transaction will escrow {senderRequestedAmountDisplay}
             USDC. You will need to approve spending to the ramp <StyledLink
               urlHyperlink={rampExplorerLink}
-              label={'smart contract'}/>.
+              label={'smart contract'} />.
             If you are on Goerli, you will need to mint <StyledLink
               urlHyperlink={usdcExplorerLink}
-              label={'fake USDC'}/>.
+              label={'fake USDC'} />.
           </NumberedStep>
         </NumberedInputContainer>
         <InputsContainer>
@@ -135,7 +145,7 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
               setUpiIdInput(e.currentTarget.value);
             }}
           />
-           <SingleLineInput
+          <SingleLineInput
             label="UPI UserName"
             value={upiUsername}
             placeholder={'VARUN SINGH'}
@@ -150,7 +160,7 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
             console.log('Attempting to write claim order');
             writeClaimOrder?.();
           }}
-          >
+        >
           Claim Order
         </Button>
       </ClaimOrderBodyContainer>

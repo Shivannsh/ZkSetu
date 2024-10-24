@@ -12,16 +12,17 @@ import { LabeledTextArea } from './LabeledTextArea';
 import { NumberedStep } from "../components/NumberedStep";
 import { abi } from "../helpers/ramp.abi";
 import { useRampContractAddress } from '../hooks/useContractAddress';
+import { OnRampOrder, OnRampOrderClaim } from "../helpers/types";
 
 
 interface SubmitOrderOnRampFormProps {
-  proof: string;
-  publicSignals: string;
+  selectedOrder: OnRampOrder;
+  selectedOrderClaim: OnRampOrderClaim;
 }
  
 export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
-  proof,
-  publicSignals,
+  selectedOrder,
+  selectedOrderClaim,
 }) => {
   const { chain } = useNetwork();
 
@@ -65,11 +66,11 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
             populated automatically. Prior to submission, select the correct order claim for
             the PhonePe payment you completed from table of claims above.
           </NumberedStep>
-        <LabeledTextArea
+        {/* <LabeledTextArea
           label="Proof Output"
-          value={proof}
+          // value={proof}
           disabled={true}
-        />
+        /> */}
 
         <div className='verification-result'>
         <p>
@@ -95,7 +96,7 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
           </Tooltip>
         </TooltipContainer> */}
         <Button
-          disabled={proof.length === 0 || publicSignals.length === 0 || isWriteCompleteOrderLoading}
+          // disabled={proof.length === 0 || publicSignals.length === 0 || isWriteCompleteOrderLoading}
           onClick={async () => {
             writeCompleteOrder?.();
           }}

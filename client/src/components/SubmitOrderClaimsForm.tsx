@@ -54,29 +54,33 @@ export const SubmitOrderClaimsForm: React.FC<SubmitOrderClaimsFormProps> = ({
 
   const [fetchedOrderClaims, setFetchedOrderClaims] = useState<OnRampOrderClaim[]>([]);
 
-  const tableHeaders = ['PhonePe UPI_ID ', 'Verified', 'Requested INR Amount', 'Expiration'];
+  const tableHeaders = ['PhonePe UPI_ID ', 'Verified', 'Expiration'];
   const tableData = fetchedOrderClaims.map((orderClaim, index) => [
-   "7906104503@ptsbi",
-   "Matches",
-    // renderVenmoHashConfirmation(index),
-    "80",
+    renderVenmoId(index),
+    renderVenmoHashConfirmation(index),
+    // formatAmountsForUSDC(orderClaim.minAmountToPay),
     formattedExpiration(orderClaim.claimExpirationTime),
   ]);
 
   function renderVenmoId(index: number) {
    
-      // const venmoLink = `https://venmo.com/code?user_id=${decryptedVenmoIds[index]}`;
-      // return <a href={venmoLink} target="_blank" rel="noopener noreferrer">{decryptedVenmoIds[index]}</a>
-      "7906104503@ptsbi"
-      ;
+    if (venmoIdsVisible && decryptedVenmoIds[index]) {
+
+      return <a>{decryptedVenmoIds[index]};</a>
+    } else {
+      return 'Encrypted';
+    }
     
   }
+  
 
   function renderVenmoHashConfirmation(index: number) {
     if (venmoIdsVisible && hashedVenmoIds[index]) {
       const orderClaim = fetchedOrderClaims[index];
       const orderClaimHashedVenmoId = orderClaim.encryptedOffRamperUpiID.toString();
       const venmoHash = hashedVenmoIds[index];
+      console.log(venmoHash);
+      console.log(orderClaimHashedVenmoId);
 
       if (orderClaimHashedVenmoId === venmoHash) {
         return 'Matches';
@@ -135,8 +139,9 @@ export const SubmitOrderClaimsForm: React.FC<SubmitOrderClaimsFormProps> = ({
 
         const claimId = i;
         const offRamper = claimsData.offRamper.toString();
-        const encryptedOffRamperUpiID = claimsData.venmoId;
-        const status = claimsData.status; 
+        const hashedVenmoId = claimsData.venmoId;
+        const status = claimsData.status;
+        const encryptedOffRamperUpiID = claimsData.encryptedOffRamperVenmoId.substring(2); 
         const offRamperUpiID_usernameHash = claimsData.offRamperUpiID_usernameHash.substring(2);
         const claimExpirationTime = claimsData.claimExpirationTime.toString();
         
@@ -223,7 +228,18 @@ export const SubmitOrderClaimsForm: React.FC<SubmitOrderClaimsFormProps> = ({
             selectedRow={getIndexForSelectedClaim(currentlySelectedOrderClaim)}
             rowsPerPage={3}
           />
-         
+           <Button
+            disabled={false}
+            onClick={async () => {
+              if (accountHash === "") {
+                await signMessage();
+              } else {
+                toggleVenmoIds();
+              }
+            }}
+            >
+            {venmoIdsVisible ? 'Hide Venmo IDs' : 'Decrypt and Verify IDs'}
+          </Button> 
         </SubmitOrderClaimsFormTableAndButtonContainer>
       </SubmitOrderClaimsFormBodyContainer>
     </SubmitOrderClaimsFormHeaderContainer>

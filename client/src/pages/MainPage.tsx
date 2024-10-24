@@ -17,9 +17,9 @@ import { SubmitOrderOnRampForm } from "../components/SubmitOrderOnRampForm";
 import { TopBanner } from "../components/TopBanner";
 
 import {
-  useAccount, 
-  useContractRead, 
-  useNetwork, 
+  useAccount,
+  useContractRead,
+  useNetwork,
 } from "wagmi";
 
 import { abi } from "../helpers/ramp.abi";
@@ -46,7 +46,7 @@ export const MainPage: React.FC<{}> = (props) => {
   const rampAddress = useRampContractAddress(chain);
   const usdcAddress = useUSDCContractAddress(chain);
 
-console.log(rampAddress);
+  console.log(rampAddress);
 
   /*
     App State
@@ -59,7 +59,7 @@ console.log(rampAddress);
   const [actionState, setActionState] = useState<FormState>(FormState.DEFAULT);
 
   const [selectedOrder, setSelectedOrder] = useState<OnRampOrder>({} as OnRampOrder);
-  const [selectedOrderClaim, setSelectedOrderClaim] = useState<OnRampOrderClaim >({} as OnRampOrderClaim);
+  const [selectedOrderClaim, setSelectedOrderClaim] = useState<OnRampOrderClaim>({} as OnRampOrderClaim);
 
   const [rampContractAddress, setRampContractAddress] = useState<string>(useRampContractAddress(chain));
   const [usdcContractAddress, setUSDCContractAddress] = useState<string>(useUSDCContractAddress(chain));
@@ -74,7 +74,7 @@ console.log(rampAddress);
   const [fetchedOrders, setFetchedOrders] = useState<OnRampOrder[]>([]);
 
   // order table state
-  const orderTableHeaders = ['Creator', 'Requested USDC Amount','Amount Of INR' ,'Status'];
+  const orderTableHeaders = ['Creator', 'Requested USDC Amount', 'Amount Of INR', 'Status'];
   const orderTableData = fetchedOrders.map((order) => [
     formatAddressForTable(order.onRamper),
     formatAmountsForUSDC(order.amountToReceive),
@@ -132,7 +132,7 @@ console.log(rampAddress);
         case "optimism":
           explorer = 'https://optimistic.etherscan.io/address/';
           break;
-        
+
         case "goerli":
           explorer = 'https://goerli.etherscan.io/address/';
           break;
@@ -159,6 +159,7 @@ console.log(rampAddress);
 
         const orderId = rawOrderData.id.toString();
         const onRamper = orderData.onRamper;
+        const onRamperEncryptPublicKey = orderData.onRamperEncryptPublicKey.substring(2);
         const amountToReceive = orderData.amountToReceive;
         const amountToPayINR = orderData.amountToPayINR;
         const status = orderData.status;
@@ -166,6 +167,7 @@ console.log(rampAddress);
         const order: OnRampOrder = {
           orderId,
           onRamper,
+          onRamperEncryptPublicKey,
           amountToReceive,
           amountToPayINR,
           status,
@@ -231,10 +233,10 @@ console.log(rampAddress);
       <div className="title">
         <Header>Fiat to Crypto On-Ramp From PhonePe</Header>
         <NumberedInputContainer>
-          <span style={{ color: 'rgba(255, 255, 255, 0.7)', lineHeight: '1.3'}}>
+          <span style={{ color: 'rgba(255, 255, 255, 0.7)', lineHeight: '1.3' }}>
             This is an experimental app demonstrating zero knowledge proof technology using a ramp <StyledLink
-            urlHyperlink={blockExplorer + rampContractAddress}
-            label={'smart contract'}/> to verify proof of payment made on PhonePe, a popular P2P payment service,
+              urlHyperlink={blockExplorer + rampContractAddress}
+              label={'smart contract'} /> to verify proof of payment made on PhonePe, a popular P2P payment service,
             and then exchange for USDC.
           </span>
           <NumberedStep step={1}>
@@ -244,8 +246,8 @@ console.log(rampAddress);
           </NumberedStep>
           <NumberedStep step={2}>
             Off-rampers: the flow will require your numeric <StyledLink
-            urlHyperlink="https://github.com/0xSachinK/zk-p2p-onramp/blob/main/README.md#fetching-PhonePe-id-instructions"
-            label={'PhonePe ID'}/> and some USDC. You will also need to approve allowance to the ramp smart contract above.
+              urlHyperlink="https://github.com/0xSachinK/zk-p2p-onramp/blob/main/README.md#fetching-PhonePe-id-instructions"
+              label={'PhonePe ID'} /> and some USDC. You will also need to approve allowance to the ramp smart contract above.
             Submitting a claim escrows the USDC amount which can be clawed back if the claim is not completed by the on-ramper.
           </NumberedStep>
         </NumberedInputContainer>
@@ -273,7 +275,7 @@ console.log(rampAddress);
         <Wrapper>
           {actionState === FormState.NEW && (
             <Column>
-              <NewOrderForm loggedInWalletAddress={ethereumAddress}/>
+              <NewOrderForm loggedInWalletAddress={ethereumAddress} />
             </Column>
           )}
           {actionState === FormState.CLAIM && (
@@ -308,8 +310,8 @@ console.log(rampAddress);
               </Column>
               <Column>
                 <SubmitOrderOnRampForm
-                  proof={submitOrderProof}
-                  publicSignals={submitOrderPublicSignals}
+                  selectedOrder={selectedOrder}
+                  selectedOrderClaim={selectedOrderClaim}
                 />
               </Column>
             </ConditionalContainer>

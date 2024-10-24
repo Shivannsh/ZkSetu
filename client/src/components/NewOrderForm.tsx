@@ -58,6 +58,7 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({
       formatAmountsForTransactionParameter(newOrderAmount),
       // Assuming on-ramper wants to pay at most newOrderAmount for their requested USDC amount versus previously UINT256_MAX
       formatAmountsForTransactionParameter(newOrderAmount*inrAmount),
+      '0x'  + venmoIdEncryptingKey 
     ],
     onError: (error: { message: any }) => {
       console.error(error.message);

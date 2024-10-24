@@ -1,3 +1,5 @@
+import { Bytes } from "ethers";
+
 export enum OrderStatus {
   UNOPENED = "unopened",
   OPEN = "open",
@@ -15,6 +17,7 @@ export enum OrderStatus {
   
 export interface OnRampOrder {
   orderId: number;
+  onRamperEncryptPublicKey : string;
   onRamper: string;
   amountToReceive: number;
   amountToPayINR: number;
