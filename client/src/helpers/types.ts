@@ -43,8 +43,10 @@ export enum OrderClaimStatus {
 export interface OnRampOrderClaim {
   claimId: number;
   offRamper: string;
-  offRamperUpiID_usernameHash: string;
+  hashedVenmoID: string;
+  offRamperUpiID_usernameHash: string; // this will never be used
   status: OrderClaimStatus;
   encryptedOffRamperUpiID: string;
   claimExpirationTime: number;
+  minAmountToPay: number;
 }

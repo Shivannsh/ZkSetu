@@ -61,7 +61,7 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
     contractInterface: abi,
     functionName: 'claimOrder',
     args: [
-      upiIdInput,  
+      hashedVenmoId,  
       upiUsername,
       selectedOrder.orderId,
       '0x' + encryptedVenmoId,
@@ -95,8 +95,10 @@ export const ClaimOrderForm: React.FC<ClaimOrderFormProps> = ({
       if (upiIdInput && upiIdInput.length > 4) {
         const encryptedVenmoId = await encryptMessage(upiIdInput, selectedOrder.onRamperEncryptPublicKey);
         setEncryptedVenmoId(encryptedVenmoId);
-
+        console.log(selectedOrder.onRamperEncryptPublicKey);
+        
         const hashedVenmoId = await generateVenmoIdHash(upiIdInput);
+        console.log(hashedVenmoId);
         setHashedVenmoId(hashedVenmoId);
 
       }
