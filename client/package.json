@@ -26,6 +26,7 @@
     "ethereumjs-abi": "^0.6.8",
     "ethers": "^5.7.1",
     "forge-std": "^1.1.2",
+    "framer-motion": "^11.11.10",
     "libmime": "^5.1.0",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",

@@ -379,11 +379,12 @@ const ConditionalContainer = styled.div`
 const Column = styled.div`
   gap: 1rem;
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, darkgreen, lightgreen); /* Gradient from dark green to light green */
   padding: 1.5rem;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.2);
 `;
+
 
 const NumberedInputContainer = styled(Col)`
   gap: 1rem;

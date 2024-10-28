@@ -13,6 +13,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { MainPage } from "./pages/MainPage";
 import { BottomNav } from "./components/BottomNav";
 import "./styles.css";
+import { Explore } from "./pages/Explore";
 
 
 const App = () => {
@@ -52,13 +53,15 @@ const NavSection: React.FC = () => {
       <Logo className={pathname === "/" ? "current_page" : "off"} to={"/"}>
         ZK SETU
       </Logo>
+  
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "1rem",
         }}
-      >
+      > 
+    
         <ConnectButton />
       </div>
     </Nav>

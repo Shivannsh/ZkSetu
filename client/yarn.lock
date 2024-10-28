@@ -8782,6 +8782,7 @@ __metadata:
     ethereumjs-abi: ^0.6.8
     ethers: ^5.7.1
     forge-std: ^1.1.2
+    framer-motion: ^11.11.10
     jest-junit: ^15.0.0
     libmime: ^5.1.0
     localforage: ^1.10.0
@@ -10661,6 +10662,26 @@ __metadata:
   dependencies:
     map-cache: ^0.2.2
   checksum: 1cbbd0b0116b67d5790175de0038a11df23c1cd2e8dcdbade58ebba5594c2d641dade6b4f126d82a7b4a6ffc2ea12e3d387dbb64ea2ae97cf02847d436f60fdc
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:^11.11.10":
+  version: 11.11.10
+  resolution: "framer-motion@npm:11.11.10"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 18706747b4ac5c2ddcb73ee326edf3bc5f217067e1d658a2d4b09b4a05e5cd983aa61755fc97360b2b21fb407eea990527bf80177b83438968687db0d16d5d3f
   languageName: node
   linkType: hard
 
