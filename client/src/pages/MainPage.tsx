@@ -379,7 +379,7 @@ const ConditionalContainer = styled.div`
 const Column = styled.div`
   gap: 1rem;
   align-self: flex-start;
-  background: linear-gradient(135deg, blue, purple); /* Gradient from dark green to light green */
+  background: linear-gradient(135deg, lightgreen, lightgreen); /* Gradient from dark green to light green */
   padding: 1.5rem;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.2);

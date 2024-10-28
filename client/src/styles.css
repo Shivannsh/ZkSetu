@@ -36,6 +36,6 @@ h1 {
 
 
 html {
-  background: linear-gradient(to bottom, #1a237e, #3f51b5, #bbdefb) !important; /* Dark blue to light blue shades */
-  color: #f0f8ff; /* Light, slightly blue-tinted white for readability */
+  background: linear-gradient(to bottom, #48ae4d, #66bb6a, #8beb8e) !important; /* Medium green to light green shades */
+  color: #2c3e50; /* Dark color for good contrast with the light background */
 }
