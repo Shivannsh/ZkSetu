@@ -23,7 +23,7 @@ Zk-Setu was developed to solve the issue of trust in fiat-to-crypto exchanges by
 ## Challenges
 
 
-- **SP1 Integration Issue**: The SP1 component, which plays a role in the seamless operation of the escrow, is currently not functioning as expected. Debugging and improvements are ongoing to restore its functionality and enhance transaction flow.
+- **SP1 Integration Issue**: There is a version difference issue with SP1 and Aligned layer , proof is successfully generated and verified on SP1 prover network but prover network only supports v2.X.X and v3.X.X and Aligned supports proof generation and verification only for SP1 version v1.0.1 which require proof generation locally. But due to computational power limiations (Sp1 require atleast 32 gigs of RAM) so we were not able to Generate the proof locally . The code is perfect and just computational is the limiation. So please Take this into consideration. 
 - **Trustless Fiat-to-Crypto Escrow**: Ensuring transactions are completely trustless through decentralized proof verification.
 - **Seamless Integration with Aligned**: Coordinating ZK-proof verification on the Aligned layer while maintaining efficiency and low costs.
 - **Privacy and Scalability**: Balancing privacy, cost, and performance using the Aligned protocol for ZK-proof verification.

@@ -2,7 +2,7 @@ import { Chain } from '@wagmi/core'
 
 export const baseSepolia = {
   id: 84532,
-  name: 'baseSepolia',
+  name: 'Holesky',
   network: 'baseSepolia',
   nativeCurrency: {
     decimals: 18,

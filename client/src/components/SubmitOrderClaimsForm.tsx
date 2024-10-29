@@ -218,9 +218,9 @@ export const SubmitOrderClaimsForm: React.FC<SubmitOrderClaimsFormProps> = ({
       <SubHeader>Select Claim</SubHeader>
       <SubmitOrderClaimsFormBodyContainer>
         <NumberedStep>
-          Complete one of the claims below by sending the requested amount to the Venmo
+          Complete one of the claims below by sending the requested amount to the UPI
           handle (click the link to view the handle). Make sure you have e-mail receipts
-          enabled on Venmo before sending the payment.
+          enabled on UPI before sending the payment.
         </NumberedStep>
         <SubmitOrderClaimsFormTableAndButtonContainer>
           <OrderTable
@@ -244,7 +244,7 @@ export const SubmitOrderClaimsForm: React.FC<SubmitOrderClaimsFormProps> = ({
               }
             }}
             >
-            {venmoIdsVisible ? 'Hide Venmo IDs' : 'Decrypt and Verify IDs'}
+            {venmoIdsVisible ? 'Hide UPI IDs' : 'Decrypt and Verify IDs'}
           </Button> 
         </SubmitOrderClaimsFormTableAndButtonContainer>
       </SubmitOrderClaimsFormBodyContainer>

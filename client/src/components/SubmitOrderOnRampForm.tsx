@@ -73,12 +73,7 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
         /> */}
 
         <div className='verification-result'>
-        <p>
-        verification result: true<br />
-            Transaction ID: T2410171524101780402156<br />
-            Paid to name: Mr SUNNY<br />
-            Amount: 30
-        </p>
+        
         </div>
 
         {/* <TooltipContainer>
@@ -96,7 +91,7 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
           </Tooltip>
         </TooltipContainer> */}
         <Button
-          // disabled={proof.length === 0 || publicSignals.length === 0 || isWriteCompleteOrderLoading}
+          disabled={true}
           onClick={async () => {
             writeCompleteOrder?.();
           }}
