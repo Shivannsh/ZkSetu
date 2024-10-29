@@ -30,7 +30,7 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({
   const [newOrderAmount, setNewOrderAmount] = useState<number>(0);
   const [inrAmount, setInrAmount] = useState<number>(0);
   const [totalInrAmount, setTotalInrAmount] = useState<number>(0);
-  const [venmoIdEncryptingKey, setVenmoIdEncryptingKey] = useState<string>('');
+  const [UPIIdEncryptingKey, setUPIIdEncryptingKey] = useState<string>('');
   
   const { chain } = useNetwork();
 
@@ -58,7 +58,7 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({
       formatAmountsForTransactionParameter(newOrderAmount),
       // Assuming on-ramper wants to pay at most newOrderAmount for their requested USDC amount versus previously UINT256_MAX
       formatAmountsForTransactionParameter(newOrderAmount*inrAmount),
-      '0x'  + venmoIdEncryptingKey 
+      '0x'  + UPIIdEncryptingKey 
     ],
     onError: (error: { message: any }) => {
       console.error(error.message);
@@ -85,9 +85,9 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({
       setAccountHash(accountHash);
       localStorage.setItem(accountHashKey, accountHash);
       
-      // Extract public key from account hash and set as venmo encrypting key parameter
+      // Extract public key from account hash and set as UPI encrypting key parameter
       const publicKey = getPublicKeyFromAccount(accountHash);
-      setVenmoIdEncryptingKey(publicKey);
+      setUPIIdEncryptingKey(publicKey);
     }
   }, [signedMessageSignature])
 
@@ -96,12 +96,12 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({
     const accountHash = localStorage.getItem(accountHashKey);
     setAccountHash(accountHash || "");
 
-    // If accountHash exists, extract public key from account hash and set as venmo encrypting key parameter
+    // If accountHash exists, extract public key from account hash and set as UPI encrypting key parameter
     if (accountHash) {
       const publicKey = getPublicKeyFromAccount(accountHash);
-      setVenmoIdEncryptingKey(publicKey);
+      setUPIIdEncryptingKey(publicKey);
     } else {
-      setVenmoIdEncryptingKey("");
+      setUPIIdEncryptingKey("");
     }
 
   }, [loggedInWalletAddress]);

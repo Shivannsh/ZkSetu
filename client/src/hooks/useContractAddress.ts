@@ -1,12 +1,12 @@
 import {
   Chain
 } from "wagmi";
-import { baseSepolia } from "../baseSepolia";
+import { Holesky } from "../holesky";
 
 import { contractAddresses } from '../helpers/deployed_addresses';
 
 
-export function useRampContractAddress(chain: Chain = baseSepolia) {
+export function useRampContractAddress(chain: Chain = Holesky) {
   let contractsForNetwork = contractAddresses[chain.network];
   if (contractsForNetwork) {
     return contractsForNetwork.ramp;
@@ -15,7 +15,7 @@ export function useRampContractAddress(chain: Chain = baseSepolia) {
   }
 }
 
-export function useUSDCContractAddress(chain: Chain = baseSepolia) {
+export function useUSDCContractAddress(chain: Chain = Holesky) {
   let contractsForNetwork = contractAddresses[chain.network];
   if (contractsForNetwork) {
     return contractsForNetwork.usdc;

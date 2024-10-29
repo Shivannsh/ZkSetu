@@ -13,7 +13,6 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { MainPage } from "./pages/MainPage";
 import { BottomNav } from "./components/BottomNav";
 import "./styles.css";
-import { Explore } from "./pages/Explore";
 
 
 const App = () => {

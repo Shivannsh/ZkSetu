@@ -1,17 +1,17 @@
 import { Chain } from '@wagmi/core'
 
-export const baseSepolia = {
-  id: 84532,
+export const Holesky = {
+  id: 17000,
   name: 'Holesky',
-  network: 'baseSepolia',
+  network: 'Holesky',
   nativeCurrency: {
     decimals: 18,
     name: 'ETH',
     symbol: 'ETH',
   },
   rpcUrls: {
-    public: 'https://base-sepolia.g.alchemy.com/v2/4G8SnWtpGGbMLwoolbtiXu99TKMw6vMs',
-    default: 'https://base-sepolia.g.alchemy.com/v2/4G8SnWtpGGbMLwoolbtiXu99TKMw6vMs',
+    public: 'https://eth-holesky.g.alchemy.com/v2/44VAXHBaUMjTDOeGL0wSxN7MqjM5jSP1',
+    default: 'https://eth-holesky.g.alchemy.com/v2/44VAXHBaUMjTDOeGL0wSxN7MqjM5jSP1',
   },
   blockExplorers: {
     etherscan: { name: 'Blockscout', url: 'https://base-sepolia.blockscout.com/' },

@@ -12,7 +12,6 @@ import { NewOrderForm } from "../components/NewOrderForm";
 import { NumberedStep } from "../components/NumberedStep";
 import { OrderTable } from '../components/OrderTable';
 import { SubmitOrderClaimsForm } from "../components/SubmitOrderClaimsForm";
-import { SubmitOrderGenerateProofForm } from "../components/SubmitOrderGenerateProofForm";
 import { SubmitOrderOnRampForm } from "../components/SubmitOrderOnRampForm";
 import { TopBanner } from "../components/TopBanner";
 
@@ -299,15 +298,7 @@ export const MainPage: React.FC<{}> = (props) => {
                   setSelectedOrderClaim={setSelectedOrderClaim}
                 />
               </Column>
-              <Column>
-                <SubmitOrderGenerateProofForm
-                  loggedInWalletAddress={ethereumAddress}
-                  selectedOrder={selectedOrder}
-                  selectedOrderClaim={selectedOrderClaim}
-                  setSubmitOrderProof={setSubmitOrderProof}
-                  setSubmitOrderPublicSignals={setSubmitOrderPublicSignals}
-                />
-              </Column>
+              
               <Column>
                 <SubmitOrderOnRampForm
                   selectedOrder={selectedOrder}

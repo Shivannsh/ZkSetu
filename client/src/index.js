@@ -5,7 +5,7 @@ import { WagmiConfig, createClient, configureChains } from "wagmi";
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from "wagmi/providers/public";
 import { optimism } from "wagmi/chains";
-import { baseSepolia } from "./baseSepolia";
+import { Holesky } from "./holesky";
 import {
   getDefaultWallets,
   RainbowKitProvider,
@@ -17,7 +17,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [baseSepolia,optimism],
+  [Holesky,optimism],
   [
     alchemyProvider(
       { apiKey: '4G8SnWtpGGbMLwoolbtiXu99TKMw6vMs' }

@@ -33,9 +33,9 @@ export enum OrderClaimStatus {
 
 // struct OrderClaim {
 //   address offRamper;
-//   uint256 venmoId;
+//   uint256 UPIId;
 //   ClaimStatus status;
-//   uint256 encryptedOffRamperVenmoId;
+//   uint256 encryptedOffRamperUPIId;
 //   uint256 claimExpirationTime;
 //   uint256 minAmountToPay;
 // }
@@ -43,7 +43,7 @@ export enum OrderClaimStatus {
 export interface OnRampOrderClaim {
   claimId: number;
   offRamper: string;
-  hashedVenmoID: string;
+  hashedUPIID: string;
   offRamperUpiID_usernameHash: string; // this will never be used
   status: OrderClaimStatus;
   encryptedOffRamperUpiID: string;

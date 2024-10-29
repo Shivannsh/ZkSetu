@@ -31,7 +31,7 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
   */
 
   //
-  // legacy: onRamp(uint256 _orderId, uint256 _offRamper, VenmoId, bytes calldata _proof)
+  // legacy: onRamp(uint256 _orderId, uint256 _offRamper, UPIId, bytes calldata _proof)
   // new:    onRamp(uint256[2] memory _a, uint256[2][2] memory _b, uint256[2] memory _c, uint256[msgLen] memory _signals)
   //
 
@@ -42,10 +42,9 @@ export const SubmitOrderOnRampForm: React.FC<SubmitOrderOnRampFormProps> = ({
     functionName: 'onRamp',
     args: 
     [
-        1,
-        "T2410171524101780402156",
-        30,
-        ""
+        selectedOrder.orderId,
+        selectedOrderClaim.claimId,
+        
     ],
     onError: (error: { message: any }) => {
       console.error(error.message);
