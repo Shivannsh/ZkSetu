@@ -95,5 +95,5 @@ Zk-Setu was developed to solve the issue of trust in fiat-to-crypto exchanges by
 
 #### Backend
 ```bash
-
+node app.js
 ```
