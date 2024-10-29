@@ -73,7 +73,27 @@ Zk-Setu was developed to solve the issue of trust in fiat-to-crypto exchanges by
 - Aligned Protocol Access for ZK-proof verification
 
 ### Installation
+
+#### Frontend
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-repo/Zk-Setu.git
-   cd Zk-Setu
+   cd Zk-Setu/client
+   ```
+2. Install Dependencies
+   ```bash
+   yarn install
+   ```
+3. Run the localhost:3000
+   ```bash
+   yarn start
+   ```
+4. You can encounter some erros due to openssl errors while sarting the localhost:3000
+   ```bash
+   export NODE_OPTIONS=--openssl-legacy-provider
+   ```
+
+#### Backend
+```bash
+
+```
